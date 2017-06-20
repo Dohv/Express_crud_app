@@ -1,0 +1,22 @@
+<% include ../partials/boilerplate %>
+
+<a class="add-workout" href='/workouts/add'>Add a workout!</a>
+
+<div class='workouts'>
+  <% workoutData.forEach(function(workout) { %>
+  <div class = 'works'>
+  <form method='POST' action='/workouts/<%= workout.id %>?_method=DELETE'>
+        <input class='delete' type='submit' value='X' />
+      </form>
+    <div class='my-workout'>
+      <h3><%= workout.title %></h3>
+      <h4><%= workout.id %></h4>
+      <a href='/workouts/<%= workout.id %>'>Go to page</a>
+      <a href='/workouts/edit/<%= workout.id %>'>Edit workout</a>
+     </div>
+    </div>
+  <% }) %>
+</div>
+
+
+<% include ../partials/end %>

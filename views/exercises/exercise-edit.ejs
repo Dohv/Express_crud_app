@@ -1,0 +1,8 @@
+<% include ../partials/boilerplate %>
+
+<form method='POST' action='/exercises/<%= id %>?_method=PUT'>
+  <input name='name' type='text' value='<%= exercise.name %>' />
+  <input type='submit' value='Edit it!' />
+</form>
+
+<% include ../partials/end %>

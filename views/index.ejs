@@ -1,0 +1,17 @@
+<% include ./partials/boilerplate.ejs %>
+
+<div class='hero'>
+  <h1><%= message %></h1>
+  <h3><%= subTitle %></h3>
+</div>
+
+<% if (showMore === true) { %>
+<div class='more'>
+<p>Workout Planner is a great way to aproach a workout!</p>
+</div>
+<div class='banner'>
+  <h3 class='pain'>NO PAIN! NO GAIN!</h3>
+</div>
+<% } %>
+
+<% include ./partials/end.ejs %>

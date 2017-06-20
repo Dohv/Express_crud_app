@@ -1,0 +1,18 @@
+<% include ../partials/boilerplate %>
+
+
+<div class='single-exercise'>
+<h3><%= workout[0].title %></h3>
+  <% if (workout) { %>
+    <% workout.forEach(function(exercise) { %>
+        <h4><%= exercise.name %></h4>
+    <% }); %>
+  <% } else { %>
+    <%= console.log('hello') %>
+  <% } %>
+  </div>
+    
+
+  <a href='/workouts'>Return to workouts</a>
+
+<% include ../partials/end %>

@@ -1,0 +1,23 @@
+<% include ../partials/boilerplate %>
+
+<a class='add-exercise' href='/exercises/add'>Add a exercise!</a>
+
+<div class='exercises'>
+  <% exerciseData.forEach(function(exercise) { %>
+  <div class="exes">
+  <form method='POST' action='/exercises/<%= exercise.id %>?_method=DELETE'>
+        <input class='delete' type='submit' value='X' />
+      </form>
+    <div class='my-exercise'>
+      <h3><%= exercise.name %></h3>
+      <a href='/exercises/<%= exercise.id %>'>Go to page</a>
+      <a href='/exercises/edit/<%= exercise.id %>'>Edit exercise</a>
+      
+    </div>
+  <% }) %>
+</div>
+
+
+
+
+<% include ../partials/end %>
