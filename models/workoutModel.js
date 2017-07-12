@@ -9,14 +9,27 @@ Workout.findAll = () => {
 };
 
 Workout.findById = id => {
-  return db.query(
-    `SELECT workouts.title, exercises.name 
-    FROM exercises 
-    JOIN exercises_in_workouts ON exercises.id = exercises_in_workouts.exercises_id 
-    JOIN workouts ON exercises_in_workouts.workouts_id = workouts.id 
-    WHERE workouts.id = $1`, [id]
-    )
+  return db.tx(t => {
+    // creating a sequence of transaction queries:
+    const q1 = t.any(
+      `SELECT exercises.name 
+      FROM exercises 
+      JOIN exercises_in_workouts ON exercises.id = exercises_in_workouts.exercises_id 
+      WHERE exercises_in_workouts.workouts_id = $1`, [id]);
+    const q2 = t.one(`SELECT workouts.title FROM workouts where id = $1`, [id]);
+
+    // returning a promise that determines a successful transaction:
+    return t.batch([q1, q2]); // all of the queries are to be resolved;
+})
+    .then(data => {
+        console.log(data); // printing successful transaction output;
+        return data;
+    })
+    .catch(error => {
+        console.log(error); // printing the error;
+    });
 };
+
 
 
 
@@ -31,9 +44,10 @@ Workout.create = (workout) => {
   )
 };
 
-Workout.findBywoId 
+// Workout.findBywoId 
 
 Workout.update = (workout, id) => {
+  console.log(workout);
   return db.none(
     `
     UPDATE workouts SET

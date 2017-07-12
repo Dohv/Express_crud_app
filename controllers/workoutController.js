@@ -18,7 +18,7 @@ controller.index = (req, res) => {
 controller.show = (req, res) => {
   Workout.findById(req.params.id)
     .then(workout => {
-      console.log(workout);
+      console.log('in the controller');
       res.render('workouts/workout-single', {
         documentTitle: 'Workout Planner',
         workout: workout,
@@ -30,9 +30,11 @@ controller.show = (req, res) => {
 };
 
 controller.create = (req, res) => {
+  console.log('create function');
+  //console.log(req.body);
   Workout.create({
     title: req.body.title,
-    id: req.body.id,
+    id: req.params.id,
   })
   .then(workout => {
     res.redirect('/workouts');
@@ -44,8 +46,10 @@ controller.create = (req, res) => {
 };
 
 controller.edit = (req, res) => {
+  console.log('edit function');
   Workout.findById(req.params.id)
   .then(workout => {
+    console.log(workout[1].title);
     res.render('workouts/workout-edit', {
       documentTitle: "Workout Planner",
       workout: workout,
@@ -58,6 +62,7 @@ controller.edit = (req, res) => {
 };
 
 controller.update = (req, res) => {
+  console.log('update function');
   Workout.update({
     title: req.body.title,
   }, req.params.id)

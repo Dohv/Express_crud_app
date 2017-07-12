@@ -55,6 +55,7 @@ controller.edit = (req, res) => {
 };
 
 controller.update = (req, res) => {
+  //console.log(req + ' req.body.name');
   Exercise.update({
     name: req.body.name,
   }, req.params.id)
